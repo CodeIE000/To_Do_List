@@ -36,7 +36,7 @@ class _IntroductionState extends State<Introduction> {
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               decoration: BoxDecoration(
                   color: objectGreen, borderRadius: BorderRadius.circular(20)),
-              child: Text(
+              child: const Text(
                 "Be Productive!",
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
