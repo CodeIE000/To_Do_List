@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todolist_app/pages/home.dart';
 import 'package:todolist_app/theme/colors.dart';
 
+// ignore: must_be_immutable
 class Introduction extends StatefulWidget {
   void Function()? onTap;
   Introduction({super.key});
@@ -29,11 +30,11 @@ class _IntroductionState extends State<Introduction> {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Home(),
+                builder: (context) => const Home(),
               ),
             ),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               decoration: BoxDecoration(
                   color: objectGreen, borderRadius: BorderRadius.circular(20)),
               child: const Text(
