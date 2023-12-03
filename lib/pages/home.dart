@@ -24,10 +24,12 @@ class _HomeState extends State<Home> {
     showDialog(
       context: context,
       builder: (context) => DialogBox(
-        controller: _controller,
-        pressedSave: saveToDoList,
-        pressedCancel: () => Navigator.of(context).pop(),
-      ),
+          controller: _controller,
+          pressedSave: saveToDoList,
+          pressedCancel: () {
+            Navigator.of(context).pop();
+            _controller.clear();
+          }),
     );
   }
 
@@ -35,6 +37,7 @@ class _HomeState extends State<Home> {
   void saveToDoList() {
     setState(() {
       listContent.add([false, _controller.text]);
+      _controller.clear();
       Navigator.of(context).pop();
     });
   }
