@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todolist_app/theme/colors.dart';
 
 class ListBox extends StatefulWidget {
   final bool checkedBox;
@@ -34,20 +35,28 @@ class _ListBoxState extends State<ListBox> {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
             children: [
               // Checkbox
-              Checkbox(
-                value: widget.checkedBox,
-                onChanged: widget.onChanged,
-                activeColor: Colors.black,
+              Theme(
+                data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: textColor,
+                ),
+                child: Checkbox(
+                  shape: CircleBorder(),
+                  value: widget.checkedBox,
+                  onChanged: widget.onChanged,
+                  activeColor: objectGreen,
+                ),
               ),
               Text(
                 widget.taskName,
                 style: TextStyle(
+                    color: widget.checkedBox ? objectGreen : textColor,
+                    fontWeight: FontWeight.bold,
                     decoration: widget.checkedBox
                         ? TextDecoration.lineThrough
                         : TextDecoration.none),

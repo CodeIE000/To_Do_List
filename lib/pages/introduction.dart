@@ -23,7 +23,9 @@ class _IntroductionState extends State<Introduction> {
           const Text(
             "To-Do List",
             style: TextStyle(
-                color: Colors.white, fontSize: 25, fontWeight: FontWeight.w900),
+                color: Colors.white60,
+                fontSize: 25,
+                fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 20),
           GestureDetector(
@@ -39,8 +41,8 @@ class _IntroductionState extends State<Introduction> {
                   color: objectGreen, borderRadius: BorderRadius.circular(20)),
               child: const Text(
                 "Be Productive!",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.white70, fontWeight: FontWeight.bold),
               ),
             ),
           )

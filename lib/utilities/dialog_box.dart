@@ -33,7 +33,7 @@ class DialogBox extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               child: TextField(
                 controller: controller,
-                maxLength: 25,
+                maxLength: 30,
                 style: TextStyle(color: textColor),
                 decoration: InputDecoration(
                   filled: true,
