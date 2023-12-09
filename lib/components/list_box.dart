@@ -6,12 +6,14 @@ class ListBox extends StatefulWidget {
   final bool checkedBox;
   final Function(bool?)? onChanged;
   final String taskName;
+  final void Function()? favoritePressed;
   final Function(BuildContext)? deleteTask;
   ListBox(
       {super.key,
       required this.checkedBox,
       required this.onChanged,
       required this.taskName,
+      required this.favoritePressed,
       required this.deleteTask});
 
   @override
@@ -39,29 +41,38 @@ class _ListBoxState extends State<ListBox> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Checkbox
-              Theme(
-                data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: textColor,
-                ),
-                child: Checkbox(
-                  shape: CircleBorder(),
-                  value: widget.checkedBox,
-                  onChanged: widget.onChanged,
-                  activeColor: objectGreen,
-                ),
+              Row(
+                children: [
+                  // Checkbox
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      unselectedWidgetColor: textColor,
+                    ),
+                    child: Checkbox(
+                      shape: CircleBorder(),
+                      value: widget.checkedBox,
+                      onChanged: widget.onChanged,
+                      activeColor: objectGreen,
+                    ),
+                  ),
+                  // Task Name
+                  Text(
+                    widget.taskName,
+                    style: TextStyle(
+                        color: widget.checkedBox ? objectGreen : textColor,
+                        fontWeight: FontWeight.bold,
+                        decoration: widget.checkedBox
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none),
+                  ),
+                ],
               ),
-              Text(
-                widget.taskName,
-                style: TextStyle(
-                    color: widget.checkedBox ? objectGreen : textColor,
-                    fontWeight: FontWeight.bold,
-                    decoration: widget.checkedBox
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none),
-              ),
-              // Task Name
+              // Favorite button
+              MaterialButton(
+                onPressed: () {},
+              )
             ],
           ),
         ),

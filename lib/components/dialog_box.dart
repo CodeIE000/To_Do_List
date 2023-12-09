@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist_app/theme/colors.dart';
-import 'package:todolist_app/utilities/dialog_buttons.dart';
+import 'package:todolist_app/components/dialog_buttons.dart';
 
 class DialogBox extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables

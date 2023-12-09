@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist_app/model/favorite_model.dart';
 import 'package:todolist_app/pages/favorites.dart';
 import 'package:todolist_app/pages/finished_tasks.dart';
 import 'package:todolist_app/theme/colors.dart';
-import 'package:todolist_app/utilities/dialog_box.dart';
-import 'package:todolist_app/utilities/list_box.dart';
+import 'package:todolist_app/components/dialog_box.dart';
+import 'package:todolist_app/components/list_box.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -119,13 +121,19 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(20)),
               height: 455,
               padding: const EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: listContent.length,
-                itemBuilder: (context, index) => ListBox(
-                  checkedBox: listContent[index][0],
-                  taskName: listContent[index][1],
-                  onChanged: (value) => checkboxClicked(value, index),
-                  deleteTask: (context) => deleteTask(index),
+              child: Consumer<FavoriteModel>(
+                builder: (context, value, child) => ListView.builder(
+                  itemCount: value.todolist.length,
+                  itemBuilder: (context, index) => ListBox(
+                    checkedBox: value.todolist[index][0],
+                    taskName: value.todolist[index][1],
+                    onChanged: (value) => checkboxClicked(value, index),
+                    favoritePressed: () {
+                      Provider.of<FavoriteModel>(context, listen: false)
+                          .addItemsToFavorites(index);
+                    },
+                    deleteTask: (context) => deleteTask(index),
+                  ),
                 ),
               ),
             ),
