@@ -21,6 +21,8 @@ class ListBox extends StatefulWidget {
 }
 
 class _ListBoxState extends State<ListBox> {
+  bool clickedStar = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,8 +73,17 @@ class _ListBoxState extends State<ListBox> {
               ),
               // Favorite button
               MaterialButton(
-                onPressed: () {},
-              )
+                  shape: CircleBorder(),
+                  onPressed: () {
+                    widget.favoritePressed;
+                    setState(() {
+                      clickedStar = !clickedStar;
+                    });
+                  },
+                  child: Icon(
+                    Icons.star,
+                    color: clickedStar ? Colors.yellow : Colors.black,
+                  ))
             ],
           ),
         ),

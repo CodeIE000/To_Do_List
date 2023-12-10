@@ -14,10 +14,28 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
+  FavoriteModel fm = FavoriteModel();
+
+  // Method for checking checkbox
+  void checkboxClicked(bool? value, int index) {
+    setState(() {
+      fm.todolist[index][0] = !fm.todolist[index][0];
+      fm.favoriteItems[index][0] = !fm.favoriteItems[index][0];
+    });
+  }
+
+  // Method for deleting task
+  void deleteTask(int index) {
+    setState(() {
+      fm.favoriteItems.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Home home = Home();
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -45,11 +63,11 @@ class _FavoritesState extends State<Favorites> {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Favorites(),
+                    builder: (context) => const Home(),
                   ),
                 ),
                 icon: const Icon(
-                  Icons.star,
+                  Icons.home,
                 ),
               ),
             ],
@@ -61,10 +79,10 @@ class _FavoritesState extends State<Favorites> {
             height: 15,
           ),
           const Text(
-            "  Tasks",
+            "  Favorites",
             style: TextStyle(
                 color: Colors.white70,
-                fontSize: 40,
+                fontSize: 30,
                 fontWeight: FontWeight.bold),
           ),
           Padding(
@@ -81,7 +99,7 @@ class _FavoritesState extends State<Favorites> {
                   itemBuilder: (context, index) => ListBox(
                     checkedBox: value.todolist[index][0],
                     taskName: value.todolist[index][1],
-                    onChanged: (value) => home.checkboxClicked(value, index),
+                    onChanged: (value) => checkboxClicked(value, index),
                     favoritePressed: () {
                       Provider.of<FavoriteModel>(context, listen: false)
                           .addItemsToFavorites(index);

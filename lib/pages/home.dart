@@ -16,12 +16,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Controller for Dialog Box Textfield
+  FavoriteModel fm = FavoriteModel();
   final _controller = TextEditingController();
-
-  // List for To-Do List content
-  List listContent = [
-    [false, "Hello world"]
-  ];
 
   // Method for dialog box
   void openDialogBox() {
@@ -40,7 +36,7 @@ class _HomeState extends State<Home> {
   // Method for saving To-Do List
   void saveToDoList() {
     setState(() {
-      listContent.add([false, _controller.text]);
+      fm.todolist.add([false, _controller.text]);
       _controller.clear();
       Navigator.of(context).pop();
     });
@@ -49,14 +45,16 @@ class _HomeState extends State<Home> {
   // Method for checking checkbox
   void checkboxClicked(bool? value, int index) {
     setState(() {
-      listContent[index][0] = !listContent[index][0];
+      fm.todolist[index][0] = !fm.todolist[index][0];
+      fm.favoriteItems[index][0] = !fm.favoriteItems[index][0];
     });
   }
 
   // Method for deleting task
   void deleteTask(int index) {
     setState(() {
-      listContent.removeAt(index);
+      fm.todolist.removeAt(index);
+      fm.favoriteItems.removeAt(index);
     });
   }
 
@@ -110,7 +108,7 @@ class _HomeState extends State<Home> {
             "  Tasks",
             style: TextStyle(
                 color: Colors.white70,
-                fontSize: 40,
+                fontSize: 30,
                 fontWeight: FontWeight.bold),
           ),
           Padding(

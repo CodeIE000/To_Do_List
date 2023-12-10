@@ -17,9 +17,14 @@ class FavoriteModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Methods for removing items from cart
+  // Method for removing items from cart
   void removeItemsFromFavorites(int index) {
     _favoriteItems.removeAt(index);
     notifyListeners();
+  }
+
+  // Method for checking checkbox
+  void checkboxClicked(bool? value, int index) {
+    _todolist[index][0] = !_todolist[index][0];
   }
 }
