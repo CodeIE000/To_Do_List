@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist_app/components/list_box.dart';
+import 'package:todolist_app/model/favorite_model.dart';
 import 'package:todolist_app/pages/finished_tasks.dart';
+import 'package:todolist_app/pages/home.dart';
 import 'package:todolist_app/theme/colors.dart';
 
 class Favorites extends StatefulWidget {
@@ -12,6 +16,7 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
+    Home home = Home();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -76,7 +81,7 @@ class _FavoritesState extends State<Favorites> {
                   itemBuilder: (context, index) => ListBox(
                     checkedBox: value.todolist[index][0],
                     taskName: value.todolist[index][1],
-                    onChanged: (value) => checkboxClicked(value, index),
+                    onChanged: (value) => home.checkboxClicked(value, index),
                     favoritePressed: () {
                       Provider.of<FavoriteModel>(context, listen: false)
                           .addItemsToFavorites(index);
