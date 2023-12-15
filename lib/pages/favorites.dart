@@ -16,24 +16,8 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   FavoriteModel fm = FavoriteModel();
 
-  // Method for checking checkbox
-  void checkboxClicked(bool? value, int index) {
-    setState(() {
-      fm.todolist[index][0] = !fm.todolist[index][0];
-      fm.favoriteItems[index][0] = !fm.favoriteItems[index][0];
-    });
-  }
-
-  // Method for deleting task
-  void deleteTask(int index) {
-    setState(() {
-      fm.favoriteItems.removeAt(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    Home home = Home();
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -95,18 +79,19 @@ class _FavoritesState extends State<Favorites> {
               padding: const EdgeInsets.all(10),
               child: Consumer<FavoriteModel>(
                 builder: (context, value, child) => ListView.builder(
-                  itemCount: value.todolist.length,
-                  itemBuilder: (context, index) => ListBox(
-                    checkedBox: value.todolist[index][0],
-                    taskName: value.todolist[index][1],
-                    onChanged: (value) => checkboxClicked(value, index),
-                    favoritePressed: () {
-                      Provider.of<FavoriteModel>(context, listen: false)
-                          .addItemsToFavorites(index);
-                    },
-                    deleteTask: (context) => deleteTask(index),
-                  ),
-                ),
+                    itemCount: value.favoriteItems.length,
+                    itemBuilder: (context, index) {
+                      return ListBox(
+                        checkedBox: value.favoriteItems[index][0],
+                        taskName: value.favoriteItems[index][1],
+                        onChanged: (value) => fm.checkboxClicked(value, index),
+                        favoritePressed: () {
+                          Provider.of<FavoriteModel>(context, listen: false)
+                              .addItemsToFavorites(index);
+                        },
+                        deleteTask: (context) => fm.deleteTask(index),
+                      );
+                    }),
               ),
             ),
           ),

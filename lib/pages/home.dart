@@ -25,37 +25,15 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (context) => DialogBox(
           controller: _controller,
-          pressedSave: saveToDoList,
+          pressedSave: () {
+            fm.saveToDoList();
+            Navigator.of(context).pop();
+          },
           pressedCancel: () {
             Navigator.of(context).pop();
             _controller.clear();
           }),
     );
-  }
-
-  // Method for saving To-Do List
-  void saveToDoList() {
-    setState(() {
-      fm.todolist.add([false, _controller.text]);
-      _controller.clear();
-      Navigator.of(context).pop();
-    });
-  }
-
-  // Method for checking checkbox
-  void checkboxClicked(bool? value, int index) {
-    setState(() {
-      fm.todolist[index][0] = !fm.todolist[index][0];
-      fm.favoriteItems[index][0] = !fm.favoriteItems[index][0];
-    });
-  }
-
-  // Method for deleting task
-  void deleteTask(int index) {
-    setState(() {
-      fm.todolist.removeAt(index);
-      fm.favoriteItems.removeAt(index);
-    });
   }
 
   @override
@@ -123,15 +101,16 @@ class _HomeState extends State<Home> {
                 builder: (context, value, child) => ListView.builder(
                   itemCount: value.todolist.length,
                   itemBuilder: (context, index) => ListBox(
-                    checkedBox: value.todolist[index][0],
-                    taskName: value.todolist[index][1],
-                    onChanged: (value) => checkboxClicked(value, index),
-                    favoritePressed: () {
-                      Provider.of<FavoriteModel>(context, listen: false)
-                          .addItemsToFavorites(index);
-                    },
-                    deleteTask: (context) => deleteTask(index),
-                  ),
+                      checkedBox: value.todolist[index][0],
+                      taskName: value.todolist[index][1],
+                      onChanged: (value) => fm.checkboxClicked,
+                      favoritePressed: () {
+                        Provider.of<FavoriteModel>(context, listen: false)
+                            .addItemsToFavorites(index);
+                      },
+                      deleteTask: (context) {
+                        fm.deleteTask;
+                      }),
                 ),
               ),
             ),
