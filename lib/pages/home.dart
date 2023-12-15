@@ -82,8 +82,8 @@ class _HomeState extends State<Home> {
               ),
               const Text(
                 "To-Do List",
-                style: TextStyle(
-                    color: Colors.white70, fontWeight: FontWeight.w900),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
               ),
               IconButton(
                 onPressed: () => Navigator.push(
@@ -107,9 +107,7 @@ class _HomeState extends State<Home> {
           const Text(
             "  Tasks",
             style: TextStyle(
-                color: Colors.white70,
-                fontSize: 40,
-                fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
