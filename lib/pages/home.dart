@@ -61,6 +61,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: backgroundColor,
       appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -115,7 +116,7 @@ class _HomeState extends State<Home> {
               decoration: BoxDecoration(
                   color: subBackgroundColor,
                   borderRadius: BorderRadius.circular(20)),
-              height: 455,
+              height: 600,
               padding: const EdgeInsets.all(10),
               child: ListView.builder(
                 itemCount: listContent.length,
